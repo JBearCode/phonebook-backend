@@ -60,10 +60,7 @@ let persons = [
   })
 
   const generateId = () => {
-    const maxId = persons.length > 0
-      ? Math.max(...persons.map(n => n.id))
-      : 0
-    return maxId + 1
+    return Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000
   }
   
   app.post('/api/persons', (request, response) => {
