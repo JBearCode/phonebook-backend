@@ -66,11 +66,19 @@ let persons = [
   app.post('/api/persons', (request, response) => {
     const body = request.body
   
-    if (!body.name) {
+    if (!body.name || !body.number) {
       return response.status(400).json({ 
-        error: 'content missing' 
+        error: 'Must include name and number in object' 
       })
     }
+
+    const allPriorNames = persons.map(p => p.name)
+    if (allPriorNames.includes(body.name)) {
+        return response.status(400).json({
+          error: 'This name is already in contacts'
+        })
+    }
+
   
     const person = {
       id: generateId(),
