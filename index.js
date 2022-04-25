@@ -43,7 +43,7 @@ let persons = [
 
   app.get('/api/persons/:id', (request, response) => {
     const id = Number(request.params.id)
-    const person = persons.find(note => note.id === id)
+    const person = persons.find(person => person.id === id)
 
     if (person) {
         response.json(person)
@@ -54,13 +54,13 @@ let persons = [
 
   app.delete('/api/persons/:id', (request, response) => {
     const id = Number(request.params.id)
-    notes = persons.filter(p => p.id !== id)
+    persons = persons.filter(p => p.id !== id)
   
     response.status(204).end()
   })
 
   const generateId = () => {
-    const maxId = notes.length > 0
+    const maxId = persons.length > 0
       ? Math.max(...persons.map(n => n.id))
       : 0
     return maxId + 1
@@ -69,7 +69,7 @@ let persons = [
   app.post('/api/persons', (request, response) => {
     const body = request.body
   
-    if (!body.content) {
+    if (!body.name) {
       return response.status(400).json({ 
         error: 'content missing' 
       })
