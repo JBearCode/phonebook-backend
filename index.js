@@ -29,6 +29,13 @@ let persons = [
   app.get('/', (request, response) => {
     response.send('<h1>Hello there!</h1>')
   })
+
+  app.get('/info', (request, response) => {
+    const infoDiv = 
+        `<div><p>The API currently contains ${persons.length} contacts</p>
+        <p>Timestamp: ${new Date()}</p>`
+    response.send(infoDiv)
+  })
   
   app.get('/api/persons', (request, response) => {
     response.json(persons)
